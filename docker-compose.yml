@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - DB_HOST=mongodb:27017
+      - DB_NAME=db_hansendjumari_betest
+      - DB_USER=db_user_betest
+      - DB_PASSWORD=db_userpassword_betest
+      - JWT_ACCESS_SECRET_KEY=40b97fb3-a55b-41de-be1c-079e64993611
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - mongodb
+      - redis
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongodb_data:
+  redis_data:
