@@ -16,7 +16,8 @@ export const auth = async (
       ?.replace("Bearer ", "");
 
     if (!token) {
-      throw new Error();
+      res.status(403).json({ error: "no authorization token exist" });
+      return;
     }
 
     const decoded: string | jwt.JwtPayload = jwt.verify(
