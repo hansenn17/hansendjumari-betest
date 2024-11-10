@@ -22,3 +22,5 @@ app.use("/api/user", userRoutes);
     console.log(`[server]: Server is running at http://localhost:${port}`);
   });
 })();
+
+export default app;
